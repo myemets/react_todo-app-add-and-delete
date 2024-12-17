@@ -11,9 +11,9 @@ type Props = {
 };
 
 const filterOptions = {
-  [Filter.All]: { label: 'All', href: '#/' },
-  [Filter.Active]: { label: 'Active', href: '#/active' },
-  [Filter.Completed]: { label: 'Completed', href: '#/completed' },
+  [Filter.All]: { label: `${Filter.All}`, href: '#/' },
+  [Filter.Active]: { label: `${Filter.Active}`, href: '#/active' },
+  [Filter.Completed]: { label: `${Filter.Completed}`, href: '#/completed' },
 };
 
 export const Footer: React.FC<Props> = ({

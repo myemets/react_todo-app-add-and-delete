@@ -6,11 +6,12 @@ import { Todo } from './types/Todo';
 import { TodoList } from './components/TodoList';
 import { Footer } from './components/Footer';
 import { Error } from './components/Error';
+import { Filter } from './types/Filter';
 
 export const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [errorMessage, setErrorMessage] = useState('');
-  const [filterTodo, setFilterTodo] = useState('All');
+  const [filterTodo, setFilterTodo] = useState(`${Filter.All}`);
   const [newTitleTodo, setNewTitleTodo] = useState('');
   const [tempTodo, setTempTodo] = useState<Todo | null>(null);
   const [loading, setLoading] = useState<number[]>([]);
@@ -109,15 +110,14 @@ export const App: React.FC = () => {
 
   const filteredTodos = useMemo(() => {
     return todos.filter(todo => {
-      if (filterTodo === 'active') {
-        return !todo.completed;
+      switch (filterTodo) {
+        case Filter.Active:
+          return !todo.completed;
+        case Filter.Completed:
+          return todo.completed;
+        default:
+          return true;
       }
-
-      if (filterTodo === 'completed') {
-        return todo.completed;
-      }
-
-      return true;
     });
   }, [todos, filterTodo]);
 
